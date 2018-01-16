@@ -17,7 +17,8 @@ namespace DemoApplication.Controllers
         // GET: Marks
         public ActionResult Index()
         {
-            return View(db.Marks.ToList());
+            var marks = db.Marks.Include(m => m.Student);
+            return View(marks.ToList());
         }
 
         // GET: Marks/Details/5
@@ -38,6 +39,7 @@ namespace DemoApplication.Controllers
         // GET: Marks/Create
         public ActionResult Create()
         {
+            ViewBag.StudentId = new SelectList(db.Students, "Id", "FirstName");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace DemoApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,SubjectName,MarksObtained")] Mark mark)
+        public ActionResult Create([Bind(Include = "Id,SubjectName,MarksObtained,StudentId")] Mark mark)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace DemoApplication.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.StudentId = new SelectList(db.Students, "Id", "FirstName", mark.StudentId);
             return View(mark);
         }
 
@@ -71,6 +74,7 @@ namespace DemoApplication.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.StudentId = new SelectList(db.Students, "Id", "FirstName", mark.StudentId);
             return View(mark);
         }
 
@@ -79,7 +83,7 @@ namespace DemoApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,SubjectName,MarksObtained")] Mark mark)
+        public ActionResult Edit([Bind(Include = "Id,SubjectName,MarksObtained,StudentId")] Mark mark)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace DemoApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.StudentId = new SelectList(db.Students, "Id", "FirstName", mark.StudentId);
             return View(mark);
         }
 
