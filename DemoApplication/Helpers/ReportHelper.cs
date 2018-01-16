@@ -15,12 +15,19 @@ namespace DemoApplication.Helpers
 
             foreach (var student in db.Students.ToList())
             {
-                result.Add(new StudentAverageViewModel
+                try
                 {
-                    FirstName = student.FirstName,
-                    LastName = student.LastName,
-                    Average = student.Marks.Sum(x => x.MarksObtained) / (decimal)student.Marks.Count()
-                });
+                    result.Add(new StudentAverageViewModel
+                    {
+                        FirstName = student.FirstName,
+                        LastName = student.LastName,
+                        Average = student.Marks.Sum(x => x.MarksObtained) / (decimal)student.Marks.Count()
+                    });
+                }
+                catch (DivideByZeroException)
+                {
+                    continue;
+                }
             }
 
             return result;

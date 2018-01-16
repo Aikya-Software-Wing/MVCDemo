@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DemoApplication.Models;
+using DemoApplication.Helpers;
 
 namespace DemoApplication.Controllers
 {
@@ -115,6 +116,13 @@ namespace DemoApplication.Controllers
             db.Students.Remove(student);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: Students/Averages
+        [HttpGet]
+        public ActionResult Averages()
+        {
+            return View(ReportHelper.GetStudentAverages());
         }
 
         protected override void Dispose(bool disposing)

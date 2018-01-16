@@ -282,6 +282,7 @@
     <Content Include="Views\Marks\Details.cshtml" />
     <Content Include="Views\Marks\Edit.cshtml" />
     <Content Include="Views\Marks\Index.cshtml" />
+    <Content Include="Views\Students\Averages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
