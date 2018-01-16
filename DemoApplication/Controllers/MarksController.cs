@@ -10,7 +10,6 @@ using DemoApplication.Models;
 
 namespace DemoApplication.Controllers
 {
-    [Authorize]
     public class MarksController : Controller
     {
         private StudentModel db = new StudentModel();
