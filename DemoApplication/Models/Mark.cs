@@ -24,6 +24,9 @@ namespace DemoApplication.Models
         [Range(0, 100)]
         public int MarksObtained { get; set; }
 
+        [Required]
+        public Guid StudentId { get; set; }
+
         public virtual Student Student { get; set; }
     }
 }
