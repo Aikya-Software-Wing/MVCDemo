@@ -24,7 +24,8 @@ namespace DemoApplication.Models
         public string LastName { get; set; }
 
         [Required]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 
@@ -34,7 +35,7 @@ namespace DemoApplication.Models
         public string Email { get; set; }
 
         [Required]
-        [Range(1000000000, 9999999999)]
+        [Range(1000000000, 9999999999, ErrorMessage = "Enter a valid phone number")]
         [Display(Name = "Phone Number")]
         public long PhoneNumber { get; set; }
 
