@@ -37,5 +37,7 @@ namespace DemoApplication.Models
         [Range(1000000000, 9999999999)]
         [Display(Name = "Phone Number")]
         public long PhoneNumber { get; set; }
+
+        public virtual ICollection<Mark> Marks { get; set; }
     }
 }
